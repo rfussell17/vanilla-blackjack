@@ -3,15 +3,17 @@ let secondCard = 8;
 let sum = firstCard + secondCard;
 let hasBlackJack = false;
 let isAlive = true;
+let message = "";
 
-if (sum < 21) {
-  console.log("Do you want to draw a new card?");
+if ( sum < 21) {
+  message = "Do you want to draw a new card?";
 } else if (sum === 21) {
-  console.log("Blackjack!");
+  message = "Blackjack!"; 
   hasBlackJack = true;
 } else {
-  console.log("You Lose!");
+  message = "You Lose!";
   isAlive = false
 }
 
-console.log(hasBlackJack)
+
+console.log(message);
