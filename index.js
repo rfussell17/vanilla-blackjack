@@ -22,3 +22,7 @@ function startGame(){
       }
       messageEl.textContent = message;
 }
+
+function newCard(){
+    console.log("draw new card");
+}
