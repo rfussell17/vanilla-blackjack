@@ -12,6 +12,9 @@ let player = {
     chips: 125
 }
 
+let playerEl = document.getElementById("player-el")
+playerEl.textContent = player.name + ": $" + player.chips
+
 function getRandomCard(){
     let rand = Math.floor(Math.random() * 13) + 1;
     if(rand === 1) {
@@ -22,6 +25,7 @@ function getRandomCard(){
 }
 
 function startGame(){
+    isAlive = true;
     let firstCard = getRandomCard();
     let secondCard = getRandomCard();
     cards = [firstCard, secondCard];
