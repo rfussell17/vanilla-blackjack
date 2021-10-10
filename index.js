@@ -3,6 +3,11 @@ class Person {
         this.firstCard = firstCard,
         this.secondCard = secondCard
     }
+
+    isAlive = false;
+    sum = 0
+    hasBlackJack = false;
+    cards = [this.firstCard, this.secondCard]
 }
 
 let player = new Person(getRandomCard(), getRandomCard());
@@ -14,9 +19,9 @@ let house = new Person(getRandomCard(), getRandomCard());
 house.cards = [house.firstCard, house.secondCard]
 
 // let cards = [];
-let houseSum = 0;
-let playerSum
-let hasBlackJack = false;
+// let houseSum = 0;
+// let playerSum
+// let hasBlackJack = false;
 let isAlive = false;
 let message = "";
 
@@ -27,8 +32,8 @@ let playerSumEl = document.getElementById("player-sum-el");
 let playerCardsEl = document.getElementById("player-cards-el");
 
 let houseEl = document.getElementById("house-el")
-let HouseSumEl = document.getElementById("house-sum-el");
-let HouseCardsEl = document.getElementById("house-cards-el");
+let houseSumEl = document.getElementById("house-sum-el");
+let houseCardsEl = document.getElementById("house-cards-el");
 
 playerEl.textContent = player.name + ": $" + player.chips
 
@@ -42,46 +47,59 @@ function getRandomCard(){
 }
 
 function startGame(){
-    isAlive = true;
-    let firstCard = getRandomCard();
-    let secondCard = getRandomCard();
-    player.cards = [firstCard, secondCard];
-    house.cards = [firstCard, secondCard];
-    sum = firstCard + secondCard;
+    player.isAlive = true;
+    house.isAlive = true;
+    houseSum = house.cards[0] + house.cards[1];
+    playerSum = player.cards[0] + player.cards[1];
+    // isAlive = true;
+    // let firstCard = getRandomCard();
+    // let secondCard = getRandomCard();
+    // player.cards = [firstCard, secondCard];
+    // house.cards = [firstCard, secondCard];
+    // houseSum = house.firstCard + house.secondCard;
+    // playerSum = player.firstCard + player.secondCard;
+
     renderGame();
 }
 
 function renderHouse(){
-
+    let displayHouseCards = house.cards.map(c => houseCardsEl.textContent = " " + c);
+    houseCardsEl.textContent = "Cards: " + displayHouseCards;
+    houseSumEl.textContent = "Sum: " + houseSum;
 }
 
 function renderPlayer(){
-
-}
-
-
-function renderGame(){
-    let displayHouseCards = house.cards.map(c => cardsEl.textContent = " " + c);
-    houseCardsEl.textContent = "Cards: " + displayHouseCards;
-    houseSumEl.textContent = "Sum: " + houseSum;
-    if ( houseSum < 21) {
+    let displayPlayerCards = player.cards.map(c => playerCardsEl.textContent = " " + c);
+    playerCardsEl.textContent = "Cards: " + displayPlayerCards;
+    playerSumEl.textContent = "Sum: " + playerSum;
+    if ( playerSum < 21) {
         message = "Do you want to draw a new card?";
-      } else if (sum === 21) {
+      } else if (playerSum === 21) {
         message = "Blackjack!"; 
-        hasBlackJack = true;
+        player.hasBlackJack = true;
       } else {
         message = "You Lose!";
-        isAlive = false
+        player.isAlive = false
       }
       messageEl.textContent = message;
 }
 
+
+function renderGame(){
+  
+    renderPlayer();
+    renderHouse();
+
+}
+
 function newCard(){
-    if(isAlive && hasBlackJack === false){
-        let card = getRandomCard();
-        sum += card;
-        player.cards.push(card);
-        house.cards.push(card);
+    if(player.isAlive && player.hasBlackJack === false){
+        let playerCard = getRandomCard();
+        let houseCard = getRandomCard();
+        playerSum += playerCard;
+        houseSum += houseCard;
+        player.cards.push(playerCard);
+        house.cards.push(houseCard);
         renderGame();
     } 
 }
