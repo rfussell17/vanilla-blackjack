@@ -35,6 +35,43 @@ let houseEl = document.getElementById("house-el")
 let houseSumEl = document.getElementById("house-sum-el");
 let houseCardsEl = document.getElementById("house-cards-el");
 
+let startBtn = document.getElementById('start-btn');
+let newCardBtn = document.getElementById('new-card-btn');
+let newGameBtn = document.getElementById('new-game-btn');
+
+function toggleDisplay(){
+
+    switch(isAlive){
+        case player.isAlive === true && house.isAlive === true:
+            startBtn.textContent.display = 'none'
+            newCardBtn.textContent.display = 'block'
+            newGameBtn.textContent.display = 'none'
+            break;
+        case player.isAlive === true && house.isAlive === false:
+            startBtn.textContent.display = 'none'
+            newCardBtn.textContent.display = 'none'
+            newGameBtn.textContent.display = 'block'
+            message = "House is over! You win!"
+            break;
+        case house.isAlive === true && player.isAlive === false:
+            startBtn.textContent.display = 'none'
+            newCardBtn.textContent.display = 'none'
+            newGameBtn.textContent.display = 'block'
+            message = "Bust! You Lose!"
+    }
+
+    // if(player.isAlive && house.isAlive){
+    //     startBtn.textContent.display = 'none'
+    //     newCardBtn.textContent.display = 'block'
+    //     newGameBtn.textContent.display = 'none'
+    // } else {
+    //     restartBtn.textContent.style.display = 'block'
+    //     gameBtns[0].textContent.style.display = 'none'
+    //     gameBtns[1].textContent.style.display = 'none'
+    // }
+}
+
+
 playerEl.textContent = player.name + ": $" + player.chips
 
 function getRandomCard(){
@@ -58,7 +95,7 @@ function startGame(){
     // house.cards = [firstCard, secondCard];
     // houseSum = house.firstCard + house.secondCard;
     // playerSum = player.firstCard + player.secondCard;
-
+    toggleDisplay();
     renderGame();
 }
 
@@ -72,7 +109,7 @@ function renderPlayer(){
     let displayPlayerCards = player.cards.map(c => playerCardsEl.textContent = " " + c);
     playerCardsEl.textContent = "Cards: " + displayPlayerCards;
     playerSumEl.textContent = "Sum: " + playerSum;
-    if ( playerSum < 21) {
+    if ( playerSum < 21 && houseSum < 21) {
         message = "Do you want to draw a new card?";
       } else if (playerSum === 21) {
         message = "Blackjack!"; 
