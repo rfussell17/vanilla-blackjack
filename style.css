@@ -1,12 +1,19 @@
 
 body {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    background-image: url(./img/table.jpg);
-    background-size: cover;
+    background-color: green;
     text-align: center;
     font-weight: bold;
     color: #fff;
     font-size: larger;
+}
+
+.container-fluid {
+    padding: 2em;
+}
+
+#house-el, #player-el {
+    color: goldenrod;
 }
 
 h1 {
